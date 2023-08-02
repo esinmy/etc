@@ -28,6 +28,16 @@ protoc --proto_path=$DIR echo.proto \
 protoc --proto_path="./protos" "./protos/licenses.proto" --js_out=import_style=commonjs:"./" --grpc-web_out=import_style=typescript,mode=grpcwebtext:"./"
 ```
 
+However, the generated files won't work with Vite (at least by default) and raise this kind of error:
+```
+Uncaught SyntaxError: The requested module '/src/protos/users_pb.js' does not provide an export named 'UserReferenceList'
+```
+Instead, one can use protobuf-ts library.
+```
+# example
+npx protoc --ts_out . --proto_path ./protos protos/*.proto
+```
+
 ### Legend
 ```
 --proto_path=PATH           Specify the directory in which to search for
@@ -59,3 +69,6 @@ mode=grpcweb                A binary protobuf format is also supported.
 ## Reference:
 - [Official documentation](https://github.com/grpc/grpc-web)
 - [Implementation of gRPC in web and server with TypeScript](https://medium.com/front-end-weekly/implementation-of-grpc-in-web-and-server-with-typescript-165e8ca0155b)
+- [Issue with protoc-gen-grpc-web protoc plugin and Vite](https://stackoverflow.com/questions/72946191/errors-does-not-provide-an-export-named-when-using-vite-in-grpc-web-project)
+- [grpc-web not working in a Vite+Typescript app](https://github.com/grpc/grpc-web/issues/1242)
+- [Protobuf-ts](https://github.com/timostamm/protobuf-ts)
