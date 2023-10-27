@@ -1,6 +1,9 @@
-To create a file of specific size in Windows:
+To create a file of the specific size in Windows:
 ```
-fsutil file createnew <filename> <length>
+fsutil file createnew <filename> <length_in_bytes>
 ```
 
-`length` in bytes.
+To create multiple files of the specific size in Windows:
+```
+for /L %i in (1,1,<number_of_files>) do fsutil file createnew A%i.tmp <length_in_bytes>
+```

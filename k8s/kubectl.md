@@ -53,3 +53,8 @@ Get pods by node:
 ```
 kubectl get pods -A -o wide --field-selector spec.nodeName=<node>
 ```
+
+Create k8s secret (certificate):
+```
+kubectl create secret tls mycertificate --cert "certificate.crt" --key "certificate.key"
+``` 
