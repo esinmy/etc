@@ -10,6 +10,15 @@ Remove specific index (my_index):
 curl -X DELETE -u <user>:<password> "localhost:9200/my_index?pretty"
 ```
 
+Remove heaviest indexes containing a specific word:
+```
+ curl -XGET -u  <user>:<password> "http://localhost:9200/_cat/shards?v" | sort -n -r -k6 | grep nexusperth-hub | awk '{print $1}' | xargs -I{} curl -X DELETE -u  <user>:<password> "http://localhost:9200/{}" 
+```
+
+Reference:
+- [Delete index API](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-delete-index.html#delete-index-api-request)
+- [Delete index API](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-delete-index.html#delete-index-api-request)
+
 ## Kibana Dev Tools Console
 
 
